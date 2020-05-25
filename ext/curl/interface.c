@@ -1153,6 +1153,10 @@ PHP_MINIT_FUNCTION(curl)
 	REGISTER_CURL_CONSTANT(CURLOPT_TLS13_CIPHERS);
 #endif
 
+#if LIBCURL_VERSION_NUM >= 0x073e00 /* Available since 7.62.0 */
+	REGISTER_CURL_CONSTANT(CURLOPT_UPLOAD_BUFFERSIZE);
+#endif
+
 #if LIBCURL_VERSION_NUM >= 0x074000 /* Available since 7.64.0 */
 	REGISTER_CURL_CONSTANT(CURLOPT_HTTP09_ALLOWED);
 #endif
@@ -2273,6 +2277,9 @@ static int _php_curl_setopt(php_curl *ch, zend_long option, zval *zvalue) /* {{{
 #endif
 #if LIBCURL_VERSION_NUM >= 0x073d00 /* Available since 7.61.0 */
 		case CURLOPT_DISALLOW_USERNAME_IN_URL:
+#endif
+#if LIBCURL_VERSION_NUM >= 0x073e00 /* Available since 7.62.0 */
+		case CURLOPT_UPLOAD_BUFFERSIZE:
 #endif
 #if LIBCURL_VERSION_NUM >= 0x074000 /* Available since 7.64.0 */
 		case CURLOPT_HTTP09_ALLOWED:
